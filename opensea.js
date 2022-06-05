@@ -14,6 +14,8 @@ client.on('messageCreate', async messageCreate => {
     if (messageCreate.content.startsWith('!fp')) {
         const SLUG = messageCreate.content.replace('!fp ', '')
 
+        messageCreate.react('✅')
+
         const URL = `https://api.opensea.io/api/v1/collection/${SLUG}`
         axios.get(URL)
         .then(res => {
