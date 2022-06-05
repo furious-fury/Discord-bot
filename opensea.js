@@ -14,8 +14,6 @@ client.on('messageCreate', async messageCreate => {
     if (messageCreate.content.startsWith('!fp')) {
         const SLUG = messageCreate.content.replace('!fp ', '')
 
-        messageCreate.react('✅')
-
         const URL = `https://api.opensea.io/api/v1/collection/${SLUG}`
         axios.get(URL)
         .then(res => {
@@ -23,6 +21,8 @@ client.on('messageCreate', async messageCreate => {
             function kFormatter(num) {
                 return Math.abs(num) > 999 ? Math.sign(num)*((Math.abs(num)/1000).toFixed(1)) + 'k' : Math.sign(num)*Math.abs(num)
             }
+
+            messageCreate.react('✅')
 
                 const successEmbed = new MessageEmbed()
                     .setColor('#218500')
@@ -41,9 +41,12 @@ client.on('messageCreate', async messageCreate => {
                     messageCreate.reply({ embeds: [successEmbed] });
         })
         .catch(err => {
+
+            messageCreate.react('❌')
+
             const errorEmbed = new MessageEmbed()
             .setColor('#D20e12')
-            .setTitle('ERROR !')
+            .setTitle('**ERROR !**')
             .setDescription("The bot couldn't find the requested collectiond because the requested name may not be the same on opensea. Please crosscheck to see if the name matches the one on the opensea URL")
             .setImage('https://fieryper.sirv.com/opensea.jpg')
             .setTimestamp()
