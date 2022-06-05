@@ -1,1 +1,1 @@
-worker:node opensea.js
+worker:npm run start
