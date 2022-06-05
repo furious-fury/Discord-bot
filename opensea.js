@@ -22,8 +22,6 @@ client.on('messageCreate', async messageCreate => {
                 return Math.abs(num) > 999 ? Math.sign(num)*((Math.abs(num)/1000).toFixed(1)) + 'k' : Math.sign(num)*Math.abs(num)
             }
 
-            messageCreate.react('✅')
-
                 const successEmbed = new MessageEmbed()
                     .setColor('#218500')
                     .setTitle(`${res.data.collection.name}`)
@@ -42,12 +40,11 @@ client.on('messageCreate', async messageCreate => {
         })
         .catch(err => {
 
-            messageCreate.react('❌')
-
             const errorEmbed = new MessageEmbed()
             .setColor('#D20e12')
             .setTitle('**ERROR !**')
-            .setDescription("The bot couldn't find the requested collectiond because the requested name may not be the same on opensea. Please crosscheck to see if the name matches the one on the opensea URL")
+            .setDescription("The bot couldn't find the requested collection because the requested name may not be the same on opensea. Please crosscheck to see if the name matches the one on the opensea URL")
+            .setThumbnail('https://fieryper.sirv.com/404%20Error-pana-nunu.jpg')
             .setImage('https://fieryper.sirv.com/opensea.jpg')
             .setTimestamp()
             .setFooter({ text: 'All data gotten from Opensea', iconURL: 'https://storage.googleapis.com/opensea-static/Logomark/Logomark-Blue.png' });
