@@ -10,6 +10,7 @@ client.on('ready', () => {
 
 client.login(process.env.BOT_MEME);
 
+
 client.on('message', async msg => {
   async function getMeme(){
     const res = await axios.get('https://memeapi.pythonanywhere.com/');
@@ -24,4 +25,3 @@ client.on('message', async msg => {
         break;
      }
   })
-
