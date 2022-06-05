@@ -9,10 +9,10 @@ client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
 
-client.on('message', async message => {
+client.on('messageCreate', async messageCreate => {
 
-    if (message.content.startsWith('!fp')) {
-        const SLUG = message.content.replace('!fp ', '')
+    if (messageCreate.content.startsWith('!fp')) {
+        const SLUG = messageCreate.content.replace('!fp ', '')
 
         const URL = `https://api.opensea.io/api/v1/collection/${SLUG}`
         axios.get(URL)
@@ -28,17 +28,17 @@ client.on('message', async message => {
                     .setDescription(`${res.data.collection.description}`)
                     .setThumbnail(`${res.data.collection.featured_image_url}`)
                     .addFields(
-                        { name: 'FLOOR PRICE', value: `Ξ${res.data.collection.stats.floor_price.toFixed(2)}` },
-                        { name: 'VOLUME', value: `Ξ${kFormatter(res.data.collection.stats.total_volume)}` },
+                        { name: 'FLOOR PRICE', value: `Ξ${res.data.collection.stats.floor_price.toFixed(3)}` },
+                        { name: 'VOLUME', value: `Ξ${kFormatter(res.data.collection.stats.total_volume.toFixed(3))}` },
                         { name: 'TOTAL SUPPLY', value: `${kFormatter(res.data.collection.stats.total_supply)}` },
                         { name: 'OWNERS', value: `${res.data.collection.stats.num_owners}` },
                     )
                     .setTimestamp()
-                    .setFooter({ text: 'All data gotten from Opensea', iconURL: 'https://opensea.io/' });
-                message.channel.send({ embeds: [openseaEmbed] });
+                    .setFooter({ text: 'All data gotten from Opensea', iconURL: 'https://storage.googleapis.com/opensea-static/Logomark/Logomark-Blue.png' });
+                    messageCreate.reply({ embeds: [openseaEmbed] });
         })
         .catch(err => console.error(err.success));
             }
     });
 
-client.login(process.env.BOT_OPENSEA);
+client.login(process.env.DISCORD_BOT_TOKEN);
