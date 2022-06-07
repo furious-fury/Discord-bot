@@ -22,11 +22,16 @@ client.on('messageCreate', async messageCreate => {
                 return Math.abs(num) > 999 ? Math.sign(num)*((Math.abs(num)/1000).toFixed(1)) + 'k' : Math.sign(num)*Math.abs(num)
             }
 
+
+            function truncate(str, n){
+                return (str.length > n) ? str.substr(0, n-1) + '&hellip;' : str;
+              };
+
                 const successEmbed = new MessageEmbed()
                     .setColor('#218500')
                     .setTitle(`${res.data.collection.name}`)
                     .setURL(`https://opensea.io/collection/${res.data.collection.slug}`)
-                    .setDescription(`${res.data.collection.description}`)
+                    .setDescription(`${truncate(res.data.collection.description, 500)}`)
                     .setThumbnail(`${res.data.collection.image_url}`)
                     .addFields(
                         { name: 'FLOOR PRICE', value: `Ξ${res.data.collection.stats.floor_price.toFixed(3)}` },
