@@ -31,7 +31,7 @@ client.on('messageCreate', async messageCreate => {
                     .setColor('#218500')
                     .setTitle(`${res.data.collection.name}`)
                     .setURL(`https://opensea.io/collection/${res.data.collection.slug}`)
-                    .setDescription(`${truncate(res.data.collection.description, 500)}`)
+                    .setDescription(`*${truncate(res.data.collection.description, 500)}*`)
                     .setThumbnail(`${res.data.collection.image_url}`)
                     .addFields(
                         { name: 'FLOOR PRICE', value: `Ξ${res.data.collection.stats.floor_price.toFixed(3)}` },
