@@ -1,1 +1,1 @@
-worker: node opensea.js
+worker: node index.js
