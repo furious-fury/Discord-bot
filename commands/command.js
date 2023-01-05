@@ -17,6 +17,7 @@ async function Execute(interaction) {
     const res = await axios.get(
       `https://api.opensea.io/api/v1/collection/${SLUG}`
     );
+    console.log(res.data);
     // utility function for formatting data
     function kFormatter(num) {
       return Math.abs(num) > 999
@@ -32,7 +33,7 @@ async function Execute(interaction) {
       .setColor("#218500")
       .setTitle(`${res.data.collection.name}`)
       .setURL(`https://opensea.io/collection/${res.data.collection.slug}`)
-      .setDescription(`*${truncate(res.data.collection.description, 500)}*`)
+      .setDescription(`*${truncate(res.data.collection.description, 300)}*`)
       .setThumbnail(`${res.data.collection.image_url}`)
       .addFields(
         {
@@ -47,7 +48,7 @@ async function Execute(interaction) {
         },
         {
           name: "TOTAL SUPPLY",
-          value: `${kFormatter(res.data.collection.stats.total_supply)}`,
+          value: res.data.collection.stats.total_supply,
         },
         { name: "OWNERS", value: `${res.data.collection.stats.num_owners}` }
       )
